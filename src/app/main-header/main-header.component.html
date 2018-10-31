@@ -1,0 +1,30 @@
+<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+  <ul class="navbar-nav mr-auto">
+    <li>
+      <span class="navbar-brand">{{title}}</span>
+    </li>
+    <li *ngIf="user" class="nav-item mr-2">
+      <a class="nav-link p-2 text-light" routerLink="/infoTab" routerLinkActive="active">{{'HOME.NAVINFO' | translate}} </a>
+    </li>
+    <li *ngIf="user" class="nav-item mr-2">
+      <a class="nav-link p-2 text-light" routerLink="/editTab" routerLinkActive="active">{{'HOME.NAVEDIT' | translate}}</a>
+    </li>
+  </ul>
+  <ul class="navbar-nav ml-auto">
+    <li *ngIf="user" class="nav-item mr-3">
+      <span class="nav-link p-2 text-light">{{'HOME.LOGGERHEAD' | translate}} {{user.name}}</span>
+
+    </li>
+    <li *ngIf="user" class="nav-item mr-3">
+      <a class="btn btn-outline-warning text-light" (click)="onClickLogout()">{{'HOME.NAVLOGOUT' | translate}}</a>
+    </li>
+    <li class="nav-item">
+      <label class="nav-link">
+        {{ 'HOME.SELECT' | translate }}
+        <select #langSelect (change)="translate.use(langSelect.value)">
+          <option *ngFor="let lang of translate.getLangs()" [value]="lang" [selected]="lang === translate.currentLang">{{ lang }}</option>
+        </select>
+      </label>
+    </li>
+  </ul>
+</nav>

@@ -1,0 +1,40 @@
+{
+  "HOME": {
+    "SELECT": "Change language",
+    "LOGGERHEAD": "Logged by",
+    "NAVINFO": "Information of user",
+    "NAVEDIT": "Edit user ",
+    "NAVLOGOUT": "Log out",
+    "LOADING":"Loading... Please wait"
+  },
+  "LOGIN":{
+    "TITLE": "Welcome,please Log in",
+    "LOGGED": "You are Log in now, if you want, you can change account"
+  },
+  "INFO":{
+    "USERNAME":"User name",
+    "PASSWORD": "Password",
+    "BIRTHDAY":"Birth day",
+    "DATEOFLOGIN":"Date of login",
+    "DATEOFNEXTNOTIF":"Date of next notification",
+    "INFORMATION":"Information",
+    "SUBMITBTN":"Submit",
+    "FORGOTPASSWBTN":"Forgot password?",
+    "LOGOUT":"Log out",
+    "OLDPASSWORD":"Old password",
+    "NEWPASSWORD":"New password",
+    "POPUPLOGIN":"Hello, You are logged in as",
+    "POPUPCLOSE":"Close",
+    "POPUPHEADER": "Success"
+  },
+  "ERROR":{
+    "VALIDATING": "Validating...",
+    "REQUIRED":"is required",
+    "MINLENGTH":"Min length is",
+    "USERNOTFOUND": "This user not found",
+    "USERNOTAVAILABLE": "User name not available",
+    "BADPASSWORDLOGIN":"Incorrect username or password",
+    "INCORRECTUSERNAME":"userName incorrect (1-2 words with first letter - upper). NO numbers and special symbols",
+    "DATEFORMAT":"Incorrect format. Correct formats"
+  }
+}
