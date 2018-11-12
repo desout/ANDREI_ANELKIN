@@ -1,6 +1,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { UserInfoTabComponent } from './user-info-tab.component';
+import {NO_ERRORS_SCHEMA} from '@angular/core';
+import {TestModule} from '../Test.module';
 
 describe('UserInfoTabComponent', () => {
   let component: UserInfoTabComponent;
@@ -8,7 +10,9 @@ describe('UserInfoTabComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ UserInfoTabComponent ]
+      declarations: [],
+      schemas: [NO_ERRORS_SCHEMA],
+      imports: [TestModule],
     })
     .compileComponents();
   }));
@@ -20,6 +24,6 @@ describe('UserInfoTabComponent', () => {
   });
 
   it('should create', () => {
-    expect(component).toBeTruthy();
+    expect(fixture.nativeElement).toMatchSnapshot();
   });
 });
