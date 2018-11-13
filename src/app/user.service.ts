@@ -2,83 +2,81 @@ import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable, Subject} from 'rxjs';
 import {User} from '../../server/server/User';
-import {LocalUser} from '../../server/server/LocalUser';
 import {DATE_FORMATS} from './shared/configuration';
 import * as moment from 'moment';
-import {LocalStorageUser} from './jwt.interceptor';
+import {map} from 'rxjs/operators';
+import {select, Store} from '@ngrx/store';
+import {currentUser, CurUserState} from './store';
 
 
-interface UpdatePasswordUser {
+export interface UpdatePasswordUserType {
   name: string;
   oldPassword: string;
   newPassword: string;
 }
 
-export const httpOptions = {
-  headers: new HttpHeaders({
-    'Content-Type':  'application/json'
-  })
-};
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
   private rootUrl = 'http://localhost:8000';
-  currentUser: LocalUser;
-  userUpdateHandle = new Subject<LocalUser>();
-  constructor(private http: HttpClient) {
-    const user: LocalStorageUser = JSON.parse(localStorage.getItem('currentUser'));
-    if (user !== null) {
-      this.getUser(user.id).subscribe((letUser) => this.updateLocalUser(this.getLocalUser(letUser)));
-    } else {
-      this.updateLocalUser(undefined);
-
-    }
+  currentUser$: Observable<User>;
+  constructor(private http: HttpClient, private sessionStore: Store<CurUserState>) {
+    this.currentUser$ = this.sessionStore.pipe(select(currentUser));
   }
-  getUsers(): Observable<LocalUser[]> {
+  getUsers(): Observable<User[]> {
     const url = `${this.rootUrl}/users`;
-    return this.http.get<LocalUser[]>(url);
+    return this.http.get<User[]>(url).pipe(map((users: User[]) => users.map((user) => this.getLocalUser(user))));
   }
-  getUser(id: number): Observable<LocalUser> {
+  getUser(id: number): Observable<User> {
     const url = `${this.rootUrl}/users/${id}`;
-    return this.http.get<LocalUser>(url);
+    return this.http.get<User>(url).pipe(map((user) => this.getLocalUser(user)));
   }
-  addUser(user: User): Observable<LocalUser> {
+  addUser(user: User): Observable<User> {
     const url = `${this.rootUrl}/users/add`;
-    return this.http.post<LocalUser>(url, this.getUserForSend(user), httpOptions);
+    return this.http.post<User>(url, this.getUserForSend(user));
   }
-  updateUser (user: LocalUser): Observable<LocalUser> {
-    const url = `${this.rootUrl}/users/${this.currentUser.id}`;
-    return this.http.put<LocalUser>(url, this.getUserForSend(user), httpOptions);
+  updateUser (user: User): Observable<User> {
+    const url = `${this.rootUrl}/users/${user.id}`;
+    return this.http.put<User>(url, this.getUserForSend(user));
   }
-  deleteUser (id: number): Observable<LocalUser> {
+  deleteUser (id: number): Observable<User> {
     const url = `${this.rootUrl}/users/${id}`;
-    return this.http.delete<LocalUser>(url, httpOptions);
+    return this.http.delete<User>(url).pipe(map((user) => this.getLocalUser(user)));
   }
-  updatePassword(user: UpdatePasswordUser): Observable<boolean> {
+  updatePassword(user: UpdatePasswordUserType): Observable<boolean> {
     const url = `${this.rootUrl}/account/updatePassword`;
-    return this.http.post<boolean>(url, user, httpOptions);
+    return this.http.post<boolean>(url, user);
   }
   checkUser (name: string): Observable<boolean> {
     const url = `${this.rootUrl}/users/check/${name}`;
-    return this.http.get<boolean>(url, httpOptions);
+    return this.http.get<boolean>(url);
   }
-
-  updateLocalUser(user: LocalUser) {
-    this.currentUser = user;
-    this.userUpdateHandle.next(user);
+  getFilterUsers(term: string): Observable<User[]> {
+    const url = `${this.rootUrl}/users/search`;
+    return this.http.post<User[]>(url, {name: term}).pipe(map((users: User[]) => users.map((user) => this.getLocalUser(user))));
   }
-  getUserForSend(user: LocalUser): LocalUser {
-    return{
+  updateCurrentUser(user: User): Observable<User> {
+    const url = `${this.rootUrl}/currentUser`;
+    return this.currentUser$ = this.http.put<User>(url, user).pipe(map((letUser) => this.getLocalUser(letUser)));
+  }
+  getCurrentUser(): Observable<User> {
+    const url = `${this.rootUrl}/currentUser`;
+    return this.http.get<User>(url).pipe(map((user) => this.getLocalUser(user)));
+  }
+  getUserForSend(user: User): User {
+    return {
       name: user.name,
       dateOfBirth: this.getUTCDate(user.dateOfBirth),
       dateOfFirstLogin: this.getUTCDate(user.dateOfFirstLogin),
       dateNextNotification: this.getUTCDate(user.dateNextNotification),
       information: user.information,
+      role: user.role
     };
   }
-  getLocalUser(user: LocalUser): LocalUser {
+  getLocalUser(user: User): User {
     return{
       id: user.id,
       name: user.name,
@@ -86,8 +84,11 @@ export class UserService {
       dateOfFirstLogin: this.getLocalDate(user.dateOfFirstLogin),
       dateNextNotification: this.getLocalDate(user.dateNextNotification),
       information: user.information,
+      role: user.role
     };
   }
+
+
   getLocalDate = (date: string): string => moment.utc(date).format(DATE_FORMATS[0]).toString();
   getUTCDate = (date: string): string => moment(date, DATE_FORMATS, true).utc().toString();
 

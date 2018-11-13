@@ -2,7 +2,9 @@ import {Component, OnInit} from '@angular/core';
 import {TranslateService} from '@ngx-translate/core';
 import {UserService} from '../user.service';
 import {AuthService} from '../auth.service';
-import {LocalUser} from '../../../server/server/LocalUser';
+import {GetCurrentUser, LogoutUser} from '../store/current-user-store/actions/currentUser.actions';
+import {CurUserState} from '../store';
+import {Store} from '@ngrx/store';
 
 @Component({
   selector: 'app-main-header',
@@ -11,19 +13,19 @@ import {LocalUser} from '../../../server/server/LocalUser';
 })
 export class MainHeaderComponent implements OnInit {
   title = 'Andrei Anelkin';
-  user: LocalUser;
-  constructor(public translate: TranslateService, private userService: UserService, private authService: AuthService) {
-
+  constructor(public translate: TranslateService,
+              private userService: UserService,
+              private authService: AuthService,
+              private sessionStore: Store<CurUserState>) {
     translate.addLangs(['en', 'ru']);
     translate.setDefaultLang('en');
     translate.use('en');
   }
   onClickLogout() {
-    this.authService.logout();
+    this.sessionStore.dispatch(new LogoutUser());
   }
   ngOnInit() {
-    this.userService.userUpdateHandle
-      .subscribe((letUser) => this.user = letUser);
+    this.sessionStore.dispatch(new GetCurrentUser());
   }
 
 }

@@ -12,7 +12,7 @@ export const isNameTaken = (control: AbstractControl): Observable<ValidationErro
   );
 };
 
-const checkName = (name: string): boolean => {
+export const checkName = (name: string): boolean => {
   const splittedName: string[] = name.split('');
   for (const char of splittedName ) {
     if (!isLetter(char)) {

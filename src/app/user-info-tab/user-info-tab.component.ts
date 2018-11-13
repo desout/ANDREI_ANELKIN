@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { UserService} from '../user.service';
 import {TranslateService} from '@ngx-translate/core';
-import {LocalUser} from '../../../server/server/LocalUser';
-import {startWith} from 'rxjs/operators';
+import {select, Store} from '@ngrx/store';
+import { CurUserState} from '../store';
+import {UserService} from '../user.service';
 
 @Component({
   selector: 'app-user-info-tab',
@@ -10,13 +10,10 @@ import {startWith} from 'rxjs/operators';
   styleUrls: ['./user-info-tab.component.scss']
 })
 export class UserInfoTabComponent implements OnInit {
-  user: LocalUser;
-  constructor(public translate: TranslateService, private userService: UserService) { }
+  constructor(public translate: TranslateService, public userService: UserService, public sessionStore: Store<CurUserState>) { }
 
   ngOnInit() {
-    this.userService
-      .userUpdateHandle.pipe(startWith(this.user = this.userService.currentUser))
-      .subscribe(( letUser ) => this.user = letUser);
   }
+
 
 }

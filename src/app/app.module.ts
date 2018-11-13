@@ -1,6 +1,5 @@
 import {BrowserModule} from '@angular/platform-browser';
-import {NgModule} from '@angular/core';
-
+import {NgModule, NO_ERRORS_SCHEMA} from '@angular/core';
 import {AppComponent} from './app.component';
 import {EditorFormComponent} from './editor-form/editor-form.component';
 import {ReactiveFormsModule} from '@angular/forms';
@@ -17,6 +16,22 @@ import {JwtInterceptor} from './jwt.interceptor';
 import {UserService} from './user.service';
 import { PopUpModelComponent } from './pop-up-model/pop-up-model.component';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { UserListComponent } from './userListBundle/user-list/user-list.component';
+import { UserListToggleComponent } from './userListBundle/user-list-toogle/user-list-toggle.component';
+import { UserListViewComponent } from './userListBundle/user-list-view/user-list-view.component';
+import { UserListToggleButtonComponent } from './userListBundle/user-list-toogle-button/user-list-toggle-button.component';
+import { UserItemComponent } from './userListBundle/user-item/user-item.component';
+import { UsersSearchComponent } from './userListBundle/users-search/users-search.component';
+import {UserDropDownService} from './user-dropdown.service';
+import {StoreModule} from '@ngrx/store';
+import {dataReducers, sessionReducers} from './store';
+import {StoreDevtoolsModule} from '@ngrx/store-devtools';
+import {EffectsModule} from '@ngrx/effects';
+import {UserEffects} from './store/user-store/effects/users.effects';
+import {CurrentUserEffects} from './store/current-user-store/effects/current-user.effects';
+import { EditUsersComponent } from './AdminBundle/edit-users/edit-users.component';
+import { EditUserComponent } from './AdminBundle/edit-user/edit-user.component';
+import {CommonModule} from '@angular/common';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -31,7 +46,15 @@ export function HttpLoaderFactory(http: HttpClient) {
     EditorInfoUserTabComponent,
     LoginComponent,
     MainHeaderComponent,
-    PopUpModelComponent
+    PopUpModelComponent,
+    UserListComponent,
+    UserListToggleComponent,
+    UserListViewComponent,
+    UserListToggleButtonComponent,
+    UserItemComponent,
+    UsersSearchComponent,
+    EditUsersComponent,
+    EditUserComponent
   ],
   entryComponents: [PopUpModelComponent],
   imports: [
@@ -40,6 +63,15 @@ export function HttpLoaderFactory(http: HttpClient) {
     AppRoutingModule,
     HttpClientModule,
     NgbModule,
+    CommonModule,
+    EffectsModule.forRoot([
+      UserEffects,
+      CurrentUserEffects
+    ]),
+    StoreModule.forRoot({}),
+    StoreModule.forFeature('Users', dataReducers),
+    StoreModule.forFeature('Session', sessionReducers),
+    StoreDevtoolsModule.instrument(),
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
@@ -48,8 +80,10 @@ export function HttpLoaderFactory(http: HttpClient) {
       }
     })
   ],
+  schemas: [NO_ERRORS_SCHEMA],
   providers: [
     UserService,
+    UserDropDownService,
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true }
   ],
   bootstrap: [AppComponent]
