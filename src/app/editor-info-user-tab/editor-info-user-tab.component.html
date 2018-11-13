@@ -1,11 +1,11 @@
 <div class="container">
-<ng-container *ngIf="(userService.currentUser$ | async)?.name;then form; else loading"></ng-container>
+<ng-container *ngIf="user;then form; else loading"></ng-container>
 <ng-template #form>
 
 <form (ngSubmit)="onSubmit()" [formGroup]="userForm" #formDir="ngForm">
   <div class="form-group">
     <label>{{'INFO.USERNAME' | translate}}
-      <input class="form-control" formControlName="name" [ngModel]="(userService.currentUser$ | async)?.name">
+      <input class="form-control" formControlName="name">
     </label>
     <div *ngIf="name.pending">{{'ERROR.VALIDATING' | translate}}</div>
     <div *ngIf="name.invalid && (name.dirty || name.touched);"
@@ -28,7 +28,7 @@
   <div class="form-group">
 
     <label>{{'INFO.BIRTHDAY' | translate}}
-      <input class="form-control" formControlName="dateOfBirth" required [ngModel]="(userService.currentUser$ | async)?.dateOfBirth">
+      <input class="form-control" formControlName="dateOfBirth" required>
     </label>
 
     <div *ngIf="dateOfBirth.invalid && (dateOfBirth.dirty || dateOfBirth.touched)"
@@ -44,7 +44,7 @@
   <div class="form-group">
 
     <label>{{'INFO.DATEOFLOGIN' | translate}}
-      <input class="form-control" formControlName="dateOfFirstLogin" required [ngModel]="(userService.currentUser$ | async)?.dateOfFirstLogin">
+      <input class="form-control" formControlName="dateOfFirstLogin" required>
     </label>
 
     <div *ngIf="dateOfFirstLogin.invalid && (dateOfFirstLogin.dirty || dateOfFirstLogin.touched)"
@@ -60,7 +60,7 @@
   <div class="form-group">
 
     <label>{{'INFO.DATEOFNEXTNOTIF' | translate}}
-      <input class="form-control" formControlName="dateNextNotification" required [ngModel]="(userService.currentUser$ | async)?.dateNextNotification">
+      <input class="form-control" formControlName="dateNextNotification" required>
     </label>
 
     <div *ngIf="dateNextNotification.invalid && (dateNextNotification.dirty || dateNextNotification.touched)"
@@ -76,7 +76,7 @@
   <div class="form-group">
 
     <label>{{'INFO.INFORMATION' | translate}}
-      <input class="form-control" formControlName="information" required [ngModel]="(userService.currentUser$ | async)?.information">
+      <input class="form-control" formControlName="information" required>
     </label>
 
     <div *ngIf="information.invalid && (information.dirty || information.touched)"

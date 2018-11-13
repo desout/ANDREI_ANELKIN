@@ -6,19 +6,13 @@ import {
   addUserFn,
   checkTokenAuth,
   checkUserExist,
-  deleteUserFn, getCurrentUserFn,
-  getUserFn, getUsersFilterFn,
+  deleteUserFn,
+  getUserFn,
   getUsersFn,
-  loginUserFn, logoutUserFn, updateCurrentUserFn, updatePasswordFn,
+  loginUserFn, updatePasswordFn,
   updateUserFn
 } from './server/serverWorker';
 import {checkToken} from './server/middleware';
-import * as cookieParser from 'cookie-parser';
-
-const options = {
-    origin: 'http://localhost:4200',
-    credentials: true
-};
 
 const app = express();
 const port = 8000;
@@ -27,9 +21,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
     extended: true
 }));
-app.use(cors(options));
-app.use(cookieParser());
-
+app.use(cors());
 app.listen(port, () => {
     console.log(`Server was started on ${port} port`);
 });
@@ -41,9 +33,5 @@ app.put('/users/:id', checkToken, (req, res) => updateUserFn(req, res));
 app.delete('/users/:id', checkToken, (req, res) => deleteUserFn(req, res));
 app.post('/account/register', (req, res) => addUserFn(req, res));
 app.post('/account/login', (req, res) => loginUserFn(req, res));
-app.post('/account/logout', (req, res) => logoutUserFn(req, res));
 app.post('/account/auth', (req, res) => checkTokenAuth(req, res));
 app.post('/account/updatePassword', (req, res) => updatePasswordFn(req, res));
-app.post('/users/search', (req, res) => getUsersFilterFn(req, res));
-app.get( '/currentUser', checkToken, (req, res) => getCurrentUserFn(req, res));
-app.put('/currentUser', checkToken, (req, res) => updateCurrentUserFn(req, res));

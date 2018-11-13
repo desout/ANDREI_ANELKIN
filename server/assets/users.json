@@ -1,14 +1,12 @@
-[
-  {
+[{
     "id": "0",
     "name": "Andrei",
     "password": "drogba",
     "dateOfBirth": "1997-10-23T00:00:00",
     "dateOfFirstLogin": "2017-10-23T14:48:00",
     "dateNextNotification": "2018-10-23T14:32:00",
-    "information": "Best of the Best",
-    "role": "ADMIN"
-  },
+    "information": "Best of the Best"
+},
   {
     "id": "1",
     "name": "Desout",
@@ -16,7 +14,5 @@
     "dateOfBirth": "1997-10-23T00:00:00",
     "dateOfFirstLogin": "2017-10-23T14:48:00",
     "dateNextNotification": "2018-10-23T14:32:00",
-    "information": "Best of the Best-2",
-    "role": "USER"
-  }
-]
+    "information": "Best of the Best-2"
+  }]

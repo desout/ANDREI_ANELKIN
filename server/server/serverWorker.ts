@@ -2,24 +2,24 @@ import { Request, Response } from 'express';
 import * as userModule from './userModule';
 import {User} from './User';
 import {SECRET_TOKEN} from './middleware';
-import {checkUser, getUserById, getUserByName, updateUser} from './userModule';
+import {checkUser, getUserByName} from './userModule';
 import {sign, verify, VerifyErrors} from 'jsonwebtoken';
-import * as jwt_decode from 'jwt-decode';
+import {LocalUser} from './LocalUser';
+
 export interface UpdatePasswordUser {
   name: string;
   oldPassword: string;
   newPassword: string;
 }
-function getExportUser(user: User): User {
+function getExportUser(user: User): LocalUser {
   return{
     id: user.id,
     name: user.name,
     dateOfBirth: user.dateOfBirth,
     dateOfFirstLogin: user.dateOfFirstLogin,
     dateNextNotification: user.dateNextNotification,
-    information: user.information,
-    role: user.role
-  } as User;
+    information: user.information
+  } as LocalUser;
 }
 export function getUserFn(req: Request, res: Response): void {
   const user: User | undefined = userModule.getUserById(req.params.id);
@@ -29,17 +29,15 @@ export function getUserFn(req: Request, res: Response): void {
     } else {
       res.sendStatus(400);
     }
-  }, 1000);
+  }, 3000);
 }
 export function getUsersFn(req: Request, res: Response): void {
   const users: User[] = userModule.getUsers();
-  const exportUsers: User[] = [];
-  setTimeout(() => {
-    for (const user of users) {
-      exportUsers.push(getExportUser(user));
-    }
-    res.send(exportUsers);
-  }, 1000);
+  const exportUsers: LocalUser[] = [];
+  for (const user of users) {
+    exportUsers.push(getExportUser(user));
+  }
+  res.send(exportUsers);
 }
 export function addUserFn(req: Request, res: Response): void {
   const user: User = req.body as User;
@@ -59,7 +57,7 @@ export function deleteUserFn(req: Request, res: Response): void {
   }
 }
 export function updateUserFn(req: Request, res: Response): void {
-  const user: User = <User>req.body;
+  const user: LocalUser = <LocalUser>req.body;
   const retUser: User | undefined = userModule.updateUser(user, req.params.id);
   if (retUser !== undefined) {
     res.send( getExportUser(retUser));
@@ -78,11 +76,14 @@ export function checkUserExist(req: Request, res: Response): void {
   }, 1000);
 }
 export function checkTokenAuth(req: Request, res: Response) {
-  const { authorization } = req.cookies ;
+  let token: string | undefined = req.headers['authorization']; // Express headers are auto converted to lowercase
 
-  if (authorization) {
+  if (token) {
+    if (token.startsWith('Bearer ')) {
+      token = token.slice(7, token.length);
+    }
 
-    verify(authorization, SECRET_TOKEN,  undefined, (err: VerifyErrors, decoded: string | object) => {
+    verify(token, SECRET_TOKEN,  undefined, (err: VerifyErrors, decoded: string | object) => {
       if (err) {
         return res.json({
           success: false,
@@ -114,10 +115,9 @@ export function loginUserFn(req: Request, res: Response) {
       if (user !== undefined) {
       const token = sign({username: username},
         SECRET_TOKEN,
-        { expiresIn: '24h', subject: user.id!.toString()},
-
+        { expiresIn: '24h'}
         );
-      res.cookie('authorization', token, {httpOnly: true}).json({
+      res.json({
         success: true,
         message: 'Authentication successful!',
         token: token,
@@ -137,9 +137,6 @@ export function loginUserFn(req: Request, res: Response) {
     });
   }
 }
-export function logoutUserFn(req: Request, res: Response) {
-  res.clearCookie('authorization').send();
-}
 export function updatePasswordFn(req: Request, res: Response): void {
   const user: UpdatePasswordUser = req.body as UpdatePasswordUser;
   const isComplete: boolean = userModule.updatePassword(user);
@@ -147,42 +144,5 @@ export function updatePasswordFn(req: Request, res: Response): void {
     res.send(true);
   } else {
     res.send(false);
-  }
-}
-export function getUsersFilterFn(req: Request, res: Response): void {
-
-  const name: string = req.body.name as string;
-  const users: User[] = userModule.getFilterUsers(name);
-  const exportUsers: User[] = [];
-  setTimeout(() => {
-    for (const user of users) {
-      exportUsers.push(getExportUser(user));
-    }
-    res.send(exportUsers);
-  }, 200);
-}
-export function getCurrentUserFn(req: Request, res: Response): void {
-  const { authorization } = req.cookies ;
-  const tokenInfo = jwt_decode(authorization);
-  const id: number = (<any>tokenInfo)['sub'];
-  const user = getUserById(id);
-  setTimeout(() => {
-    if (user) {
-      res.json(user);
-    } else {
-      res.sendStatus(400);
-    }
-  }, 1000);
- }
-export function updateCurrentUserFn(req: Request, res: Response): void {
-  const { authorization } = req.cookies ;
-  const tokenInfo = jwt_decode(authorization);
-  const id: number = (<any>tokenInfo)['sub'];
- const user = req.body as User;
- const newUser = updateUser(user, id);
-  if (newUser) {
-    res.json(newUser);
-  } else {
-    res.sendStatus(400);
   }
 }

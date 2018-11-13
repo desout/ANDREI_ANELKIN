@@ -5,10 +5,6 @@ import {UpdatePasswordUser} from '../../../server/server/serverWorker';
 import {map} from 'rxjs/operators';
 import {Router} from '@angular/router';
 import {UserService} from '../user.service';
-import {UsersState, CurUserState} from '../store';
-import {Store} from '@ngrx/store';
-import {LogoutUser} from '../store/current-user-store/actions/currentUser.actions';
-import {UpdatePasswordUserFn} from '../store/user-store/actions/users.actions';
 
 @Component({
   selector: 'app-forgot-password-page',
@@ -18,10 +14,7 @@ import {UpdatePasswordUserFn} from '../store/user-store/actions/users.actions';
 export class ForgotPasswordPageComponent implements OnInit {
   user: UpdatePasswordUser = { name: '', oldPassword: '', newPassword: ''};
   updatePasswordForm: FormGroup;
-  constructor(private router: Router,
-              protected userService: UserService,
-              private sessionStore: Store<CurUserState>,
-              private usersStore: Store<UsersState>) { }
+  constructor(private router: Router, protected userService: UserService, private authService: AuthService) { }
 
   ngOnInit() {
     this.updatePasswordForm = new FormGroup({
@@ -33,13 +26,22 @@ export class ForgotPasswordPageComponent implements OnInit {
     });
   }
   onSubmit() {
-    this.usersStore.dispatch(new UpdatePasswordUserFn({
+    this.userService.updatePassword({
       name: this.userName.value,
       oldPassword: this.oldPassword.value,
-      newPassword: this.newPassword.value} as UpdatePasswordUser));
+      newPassword: this.newPassword.value} as UpdatePasswordUser)
+      .pipe(map(response => {
+      if (!response) {
+        this.updatePasswordForm.get('newPassword').setErrors({
+          'badPassword': true
+        });
+      } else {
+        this.router.navigate(['./infoTab']);
+      }
+    })).subscribe();
   }
   onClickLogout() {
-    this.sessionStore.dispatch(new LogoutUser());
+    this.authService.logout();
   }
   get userName() {
     return this.updatePasswordForm.get('userName');

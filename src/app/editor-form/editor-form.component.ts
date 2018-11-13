@@ -48,8 +48,7 @@ export class EditorFormComponent implements OnInit {
       this.dateOfBirth.value,
       this.dateOfFirstLogin.value,
       this.dateNextNotification.value,
-      this.information.value,
-      'user');
+      this.information.value);
   }
   get name() { return this.userForm.get('name'); }
   get age() { return this.userForm.get('age'); }

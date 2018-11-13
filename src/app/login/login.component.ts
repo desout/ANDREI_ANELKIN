@@ -1,14 +1,11 @@
 import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {UserService} from '../user.service';
-import {AuthService, AuthResponseType, UserLogin} from '../auth.service';
+import {AuthService, ResponseType, UserLogin} from '../auth.service';
 import {map} from 'rxjs/operators';
 import {Router} from '@angular/router';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {PopUpModelComponent} from '../pop-up-model/pop-up-model.component';
-import {CurUserState} from '../store';
-import {Store} from '@ngrx/store';
-import {GetCurrentUser, LogoutUser} from '../store/current-user-store/actions/currentUser.actions';
 
 @Component({
   selector: 'app-login',
@@ -22,8 +19,7 @@ export class LoginComponent implements OnInit {
   constructor(private modalService: NgbModal,
               private router: Router,
               protected userService: UserService,
-              private authService: AuthService,
-              private sessionStore: Store<CurUserState>) {
+              private authService: AuthService) {
   }
 
   ngOnInit(): void {
@@ -37,19 +33,18 @@ export class LoginComponent implements OnInit {
 
   onSubmit() {
     this.authService.login({name: this.userName.value, password: this.password.value} as UserLogin).pipe(map(response => {
-      if (!(response as AuthResponseType).success) {
+      if (!(response as ResponseType).success) {
         this.loginForm.get('password').setErrors({
           'badPassword': true
         });
       } else {
-        this.sessionStore.dispatch(new GetCurrentUser());
         this.openPopUp();
         this.router.navigate(['./infoTab']);
       }
     })).subscribe();
   }
   onClickLogout() {
-    this.sessionStore.dispatch(new LogoutUser());
+    this.authService.logout();
   }
   openPopUp() {
     const modalRef = this.modalService.open(PopUpModelComponent);

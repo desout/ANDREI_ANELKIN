@@ -1,5 +1,5 @@
 <div class="container">
-  <ng-container *ngIf="!(userService.currentUser$ | async)?.name;then isNotLoggedTemplate; else isLoggedTemplate"></ng-container>
+  <ng-container *ngIf="!userService.currentUser;then isNotLoggedTemplate; else isLoggedTemplate"></ng-container>
 <ng-template #isNotLoggedTemplate>
   <h1>{{ 'LOGIN.TITLE' | translate }}</h1>
   <form (ngSubmit)="onSubmit()" [formGroup]="loginForm" #formDir="ngForm">

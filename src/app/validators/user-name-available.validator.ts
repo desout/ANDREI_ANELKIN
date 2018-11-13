@@ -3,11 +3,10 @@ import {catchError, map} from 'rxjs/operators';
 import {AbstractControl, AsyncValidatorFn, ValidationErrors} from '@angular/forms';
 import {UserService} from '../user.service';
 
-export const isAvailableName = (userService: UserService, lastName: string): AsyncValidatorFn => {
+export const isAvailableName = (userService: UserService): AsyncValidatorFn => {
   return (control: AbstractControl): Promise<ValidationErrors | null> | Observable<ValidationErrors | null> => {
-
     const name = control.value;
-    if (name === lastName) {
+    if (name === userService.currentUser.name) {
       return of(null);
     }
     const isValid: Observable<boolean> = userService.checkUser(name);

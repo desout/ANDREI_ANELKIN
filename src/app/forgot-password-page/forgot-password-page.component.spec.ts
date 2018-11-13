@@ -1,8 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ForgotPasswordPageComponent } from './forgot-password-page.component';
-import {NO_ERRORS_SCHEMA} from '@angular/core';
-import {TestModule} from '../Test.module';
 
 describe('ForgotPasswordPageComponent', () => {
   let component: ForgotPasswordPageComponent;
@@ -10,9 +8,7 @@ describe('ForgotPasswordPageComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [],
-      schemas: [NO_ERRORS_SCHEMA],
-      imports: [TestModule],
+      declarations: [ ForgotPasswordPageComponent ]
     })
     .compileComponents();
   }));
@@ -24,6 +20,6 @@ describe('ForgotPasswordPageComponent', () => {
   });
 
   it('should create', () => {
-    expect(fixture.nativeElement).toMatchSnapshot();
+    expect(component).toBeTruthy();
   });
 });

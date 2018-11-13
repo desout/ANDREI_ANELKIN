@@ -4,25 +4,30 @@ export const SECRET_TOKEN = 'gfndnkxgdnodgfohifdgohigfhoid';
 import {Request, Response} from 'express';
 
 export const checkToken = (req: Request, res: Response, next: any ) => {
-  const { authorization } = req.cookies ;
-  if (authorization) {
+  let token: string | undefined = req.headers['authorization']; // Express headers are auto converted to lowercase
 
-    verify(authorization, SECRET_TOKEN, undefined, (err: VerifyErrors) => {
+  if (token) {
+    if (token.startsWith('Bearer ')) {
+      token = token.slice(7, token.length);
+    }
+
+    verify(token, SECRET_TOKEN, undefined, (err: VerifyErrors, decoded: string | object) => {
       if (err) {
-        return res.sendStatus(400).json({
+        return res.json({
           success: false,
           message: 'Token is not valid'
         });
       } else {
+        req.params.decoded = decoded;
         next();
-        return res;
+        return undefined;
       }
     });
   } else {
-    return  res.sendStatus(400).json({
+    return res.json({
       success: false,
-      message: 'auth token is not supplied'
+      message: 'Auth token is not supplied'
     });
   }
-  return res;
+  return undefined;
 };
