@@ -1,7 +1,7 @@
 import {User} from './User';
 import {UpdatePasswordUser} from './serverWorker';
 
-const users: User[] = require('../assets/users.json');
+const users: User[] = require('../../src/app/assets/users.json');
 export function getUserById(id: number): User | undefined {
   if (users[id]) {
     return users[id];
@@ -53,6 +53,13 @@ export function updatePassword(user: UpdatePasswordUser): boolean {
     return false;
   }
  return false;
+}
+export function getFilterUsers(name: string): User[] {
+  if (name !== '') {
+    return getUsers().filter((user) => user.name.startsWith(name) );
+  } else {
+    return getUsers();
+  }
 }
 function getNewId() {
   const prevId: number = Number(users[users.length - 1].id);

@@ -5,6 +5,7 @@
     "NAVINFO": "Информация о пользователе",
     "NAVEDIT": "Изменить пользователя",
     "NAVLOGOUT": "Выйти",
+    "NAVADMIN": "Редактировать пользователей",
     "LOADING": "Загрузка... Пожалуйста подождите"
   },
   "LOGIN":{
@@ -21,11 +22,15 @@
     "SUBMITBTN":"Подтвердить",
     "FORGOTPASSWBTN":"Забыли пароль?",
     "LOGOUT":"Выйти",
+    "FORGOTPAGETITLE": "Пожалуйста, заполните все поля",
     "OLDPASSWORD":"Старый пароль",
     "NEWPASSWORD":"Новый пароль",
     "POPUPLOGIN":"Здравствуйте, вы вошли как",
     "POPUPCLOSE":"Закрыть",
-    "POPUPHEADER": "Успешно"
+    "POPUPHEADER": "Успешно",
+    "EDITBUTTON": "Редактировать пользователя",
+    "NEWBUTTON": "Новый пользоавтель",
+    "DELETEBTN": "Удалить"
   },
   "ERROR":{
     "VALIDATING": "Проверка данных...",
