@@ -1,0 +1,43 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`UserListViewComponent should create 1`] = `
+<div
+  id="root0"
+  ng-version="7.0.3"
+>
+  <div
+    class="listViewContainer card-body"
+  >
+    <app-users-search>
+      <div
+        class="searchComponent"
+      >
+        <div
+          class="input-group"
+        >
+          <input
+            class="form-control"
+            placeholder="Search"
+            type="text"
+          />
+          <button
+            class="btn btn-success material-icons"
+            type="button"
+          >
+            search
+          </button>
+        </div>
+        
+      </div>
+    </app-users-search>
+    
+    <div
+      class="elementsCont"
+    >
+      
+    </div>
+    
+    
+  </div>
+</div>
+`;

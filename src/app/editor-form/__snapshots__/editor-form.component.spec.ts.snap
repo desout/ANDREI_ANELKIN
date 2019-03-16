@@ -1,0 +1,222 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`EditorFormComponent should create 1`] = `
+<div
+  id="root0"
+  ng-version="7.0.3"
+>
+  <div
+    class="container"
+  >
+    <div>
+      <form
+        class="ng-untouched ng-pristine ng-valid"
+        ng-reflect-form="[object Object]"
+        novalidate=""
+      >
+        <div
+          class="form-group"
+        >
+          <label>
+            Name 
+            <input
+              class="form-control ng-untouched ng-pristine ng-valid"
+              formcontrolname="name"
+              ng-reflect-name="name"
+            />
+          </label>
+          
+          
+        </div>
+        <div
+          class="form-group"
+        >
+          <label>
+            age 
+            <input
+              class="form-control ng-untouched ng-pristine ng-valid"
+              formcontrolname="age"
+              ng-reflect-name="age"
+              ng-reflect-required=""
+              required=""
+            />
+          </label>
+          
+        </div>
+        <div
+          class="form-group"
+        >
+          <label>
+            birthday 
+            <input
+              class="form-control ng-untouched ng-pristine ng-valid"
+              formcontrolname="dateOfBirth"
+              ng-reflect-name="dateOfBirth"
+              ng-reflect-required=""
+              required=""
+            />
+          </label>
+          
+        </div>
+        <div
+          class="form-group"
+        >
+          <label>
+            date Of Login 
+            <input
+              class="form-control ng-untouched ng-pristine ng-valid"
+              formcontrolname="dateOfFirstLogin"
+              ng-reflect-name="dateOfFirstLogin"
+              ng-reflect-required=""
+              required=""
+            />
+          </label>
+          
+        </div>
+        <div
+          class="form-group"
+        >
+          <label>
+            date of notification 
+            <input
+              class="form-control ng-untouched ng-pristine ng-valid"
+              formcontrolname="dateNextNotification"
+              ng-reflect-name="dateNextNotification"
+              ng-reflect-required=""
+              required=""
+            />
+          </label>
+          
+        </div>
+        <div
+          class="form-group"
+        >
+          <label>
+            info 
+            <input
+              class="form-control ng-untouched ng-pristine ng-valid"
+              formcontrolname="information"
+              ng-reflect-name="information"
+              ng-reflect-required=""
+              required=""
+            />
+          </label>
+          
+        </div>
+        <button
+          class="btn btn-default"
+          type="submit"
+        >
+          Submit
+        </button>
+        <button
+          class="btn btn-default"
+          type="button"
+        >
+          Reset
+        </button>
+      </form>
+    </div>
+    <div
+      hidden=""
+    >
+      <div
+        class="row"
+      >
+        <div
+          class="col-sm"
+        >
+          UserName
+        </div>
+        <div
+          class="col-sm"
+        >
+          Desout
+        </div>
+      </div>
+      <div
+        class="row"
+      >
+        <div
+          class="col-sm"
+        >
+          Age
+        </div>
+        <div
+          class="col-sm"
+        >
+          18
+        </div>
+      </div>
+      <div
+        class="row"
+      >
+        <div
+          class="col-sm"
+        >
+          Birthday
+        </div>
+        <div
+          class="col-sm"
+        >
+          2018/11/11
+        </div>
+      </div>
+      <div
+        class="row"
+      >
+        <div
+          class="col-sm"
+        >
+          Date of Login
+        </div>
+        <div
+          class="col-sm"
+        >
+          2018/11/11
+        </div>
+      </div>
+      <div
+        class="row"
+      >
+        <div
+          class="col-sm"
+        >
+          date of notification
+        </div>
+        <div
+          class="col-sm"
+        >
+          2018/11/11
+        </div>
+      </div>
+      <div
+        class="row"
+      >
+        <div
+          class="col-sm"
+        >
+          info
+        </div>
+        <div
+          class="col-sm"
+        >
+          infoinfo
+        </div>
+      </div>
+      <button
+        class="btn btn-default"
+        type="button"
+      >
+        Reset
+      </button>
+      <button
+        class="btn btn-default"
+        type="button"
+      >
+        Go back
+      </button>
+    </div>
+  </div>
+</div>
+`;

@@ -1,0 +1,11 @@
+<div class="listViewContainer card-body">
+    <app-users-search></app-users-search>
+  <ng-container *ngIf="!loading;then elements; else loadingUsers"></ng-container>
+  <ng-template  #elements>
+    <div class="elementsCont">
+      <div (click)="onItemClick(i)" *ngFor=" let user of userDropDownService.users; let i = index" ><app-user-item  [user]="user "></app-user-item></div>
+    </div>
+  </ng-template>
+
+  <ng-template #loadingUsers><div class='lmask'></div></ng-template>
+</div>

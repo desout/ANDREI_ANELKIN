@@ -1,0 +1,93 @@
+<br>
+<div class="container">
+    <form (ngSubmit)="onSubmit()" [formGroup]="userForm" #formDir="ngForm">
+      <div class="form-group">
+        <label>{{'INFO.USERNAME' | translate}}
+          <input [attr.disabled]="dropdownService.selectedUser?.name" class="form-control" formControlName="name" [ngModel]="dropdownService.selectedUser?.name">
+        </label>
+        <div *ngIf="name.pending">{{'ERROR.VALIDATING' | translate}}</div>
+        <div *ngIf="name.invalid && (name.dirty || name.touched);"
+             class="alert alert-danger">
+          <div *ngIf="name.errors['minlength']">
+            {{'ERROR.MINLENGTH' | translate}} 4
+          </div>
+          <div *ngIf="name.errors['required']">
+            {{'INFO.USERNAME' | translate}} {{'ERROR.REQUIRED' | translate}}
+          </div>
+          <div *ngIf="name.errors['suitName']">
+            {{'ERROR.INCORRECTUSERNAME' | translate}}
+          </div>
+          <div *ngIf="name.errors['isBadName']">
+            {{'ERROR.USERNOTAVAILABLE' | translate}}
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group">
+
+        <label>{{'INFO.BIRTHDAY' | translate}}
+          <input class="form-control" formControlName="dateOfBirth" required [ngModel]="dropdownService.selectedUser?.dateOfBirth">
+        </label>
+
+        <div *ngIf="dateOfBirth.invalid && (dateOfBirth.dirty || dateOfBirth.touched)"
+             class="alert alert-danger">
+          <div *ngIf="dateOfBirth.errors['required']">
+            {{'INFO.BIRTHDAY' | translate}} {{'ERROR.REQUIRED' | translate}}
+          </div>
+          <div *ngIf="dateOfBirth.errors['dateValue']">
+            {{'ERROR.DATEFORMAT' | translate}} : 'YYYY/MM/DD', 'DD MMMM YYYY', 'DD-MMM-YY'
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+
+        <label>{{'INFO.DATEOFLOGIN' | translate}}
+          <input class="form-control" formControlName="dateOfFirstLogin" required [ngModel]="dropdownService.selectedUser?.dateOfFirstLogin">
+        </label>
+
+        <div *ngIf="dateOfFirstLogin.invalid && (dateOfFirstLogin.dirty || dateOfFirstLogin.touched)"
+             class="alert alert-danger">
+          <div *ngIf="dateOfFirstLogin.errors['required']">
+            {{'INFO.DATEOFLOGIN' | translate}} {{'ERROR.REQUIRED' | translate}}
+          </div>
+          <div *ngIf="dateOfFirstLogin.errors['dateValue']">
+            {{'ERROR.DATEFORMAT' | translate}}: 'YYYY/MM/DD', 'DD MMMM YYYY', 'DD-MMM-YY'
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+
+        <label>{{'INFO.DATEOFNEXTNOTIF' | translate}}
+          <input class="form-control" formControlName="dateNextNotification" required [ngModel]="dropdownService.selectedUser?.dateNextNotification">
+        </label>
+
+        <div *ngIf="dateNextNotification.invalid && (dateNextNotification.dirty || dateNextNotification.touched)"
+             class="alert alert-danger">
+          <div *ngIf="dateNextNotification.errors['required']">
+            {{'INFO.DATEOFNEXTNOTIF' | translate}} {{'ERROR.REQUIRED' | translate}}
+          </div>
+          <div *ngIf="dateNextNotification.errors['dateValue']">
+            {{'ERROR.DATEFORMAT' | translate}} : 'YYYY/MM/DD', 'DD MMMM YYYY', 'DD-MMM-YY'
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+
+        <label>{{'INFO.INFORMATION' | translate}}
+          <input class="form-control" formControlName="information" required [ngModel]="dropdownService.selectedUser?.information">
+        </label>
+
+        <div *ngIf="information.invalid && (information.dirty || information.touched)"
+             class="alert alert-danger">
+          <div *ngIf="information.errors['required']">
+            {{'INFO.INFORMATION' | translate}} {{'ERROR.REQUIRED' | translate}}
+          </div>
+          <div *ngIf="information.errors['minlength']">
+            {{'ERROR.MINLENGTH' | translate}} 4
+          </div>
+        </div>
+      </div>
+      <button type="submit" class="btn btn-default" [disabled]="userForm.invalid">{{'INFO.SUBMITBTN' | translate}}</button>
+    </form>
+  <button type="button" *ngIf="dropdownService.selectedUser?.id" class="btn btn-warning" (click)="onClickDelete()">{{'INFO.DELETEBTN' | translate}}</button>
+</div>

@@ -1,0 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`UserListToggleButtonComponent should create 1`] = `
+<div
+  id="root0"
+  ng-version="7.0.3"
+>
+  <div
+    class="btn btn-secondary dropdown-toggle"
+  />
+</div>
+`;

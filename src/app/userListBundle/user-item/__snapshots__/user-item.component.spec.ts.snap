@@ -1,0 +1,35 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`UserItemComponent should create 1`] = `
+<div
+  id="root0"
+  ng-version="7.0.3"
+>
+  <div
+    class="item"
+  >
+    <div
+      class="leftSideInfo"
+    >
+      <span>
+        
+      </span>
+      <br />
+      <span>
+        
+      </span>
+      <br />
+      <span>
+        
+      </span>
+    </div>
+    <div
+      class="rightSideInfo"
+    >
+      <span>
+        
+      </span>
+    </div>
+  </div>
+</div>
+`;

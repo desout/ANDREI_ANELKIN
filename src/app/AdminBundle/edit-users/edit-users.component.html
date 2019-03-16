@@ -1,0 +1,8 @@
+<div class="container">
+  <app-user-list></app-user-list>
+  <div class="buttons">
+    <button (click)="onClickNew()" class="btn btn-success">{{'INFO.NEWBUTTON' | translate}}</button>
+    <button (click)="onClickEdit()" class="btn btn-info">{{'INFO.EDITBUTTON' | translate}}</button>
+  </div>
+  <app-edit-user *ngIf="showEdit"></app-edit-user>
+</div>

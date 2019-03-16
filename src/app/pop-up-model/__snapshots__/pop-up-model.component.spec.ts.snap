@@ -1,0 +1,50 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`PopUpModelComponent should create 1`] = `
+<div
+  id="root0"
+  ng-version="7.0.3"
+>
+  <div
+    class="popUp"
+  >
+    <div
+      class="modal-header"
+    >
+      <h4
+        class="modal-title"
+      >
+        INFO.POPUPHEADER
+      </h4>
+      <button
+        aria-label="Close"
+        class="close"
+        type="button"
+      >
+        <span
+          aria-hidden="true"
+        >
+          ×
+        </span>
+      </button>
+    </div>
+    <div
+      class="modal-body"
+    >
+      <p>
+        INFO.POPUPLOGIN !!!
+      </p>
+    </div>
+    <div
+      class="modal-footer"
+    >
+      <button
+        class="btn btn-outline-dark"
+        type="button"
+      >
+        INFO.POPUPCLOSE
+      </button>
+    </div>
+  </div>
+</div>
+`;

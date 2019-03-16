@@ -1,0 +1,59 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`MainHeaderComponent should be select En lang 1`] = `"en"`;
+
+exports[`MainHeaderComponent should create 1`] = `
+<div
+  id="root0"
+  ng-version="7.0.3"
+>
+  <nav
+    class="navbar navbar-expand-md navbar-dark fixed-top bg-dark"
+  >
+    <ul
+      class="navbar-nav mr-auto"
+    >
+      <li>
+        <span
+          class="navbar-brand"
+        >
+          Andrei Anelkin
+        </span>
+      </li>
+      
+      
+      
+    </ul>
+    <ul
+      class="navbar-nav ml-auto"
+    >
+      
+      
+      <li
+        class="nav-item"
+      >
+        <label
+          class="nav-link"
+        >
+            
+          <select>
+            
+            <option
+              ng-reflect-value="en"
+              value="en"
+            >
+              en
+            </option>
+            <option
+              ng-reflect-value="ru"
+              value="ru"
+            >
+              ru
+            </option>
+          </select>
+        </label>
+      </li>
+    </ul>
+  </nav>
+</div>
+`;

@@ -1,0 +1,102 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`EditUsersComponent Button success should be created 1`] = `
+<button
+  class="btn btn-success"
+>
+  INFO.NEWBUTTON
+</button>
+`;
+
+exports[`EditUsersComponent should create 1`] = `
+<div
+  id="root0"
+  ng-version="7.0.3"
+>
+  <div
+    class="container"
+  >
+    <app-user-list>
+      <div
+        class="container"
+      >
+        <div
+          class="card"
+        >
+          <div>
+            <app-user-list-toogle>
+              <div
+                class="userListToggleContainer"
+              >
+                <div
+                  class="card-header"
+                >
+                  <span>
+                    <div>
+                      <app-user-item>
+                        <div
+                          class="item"
+                        >
+                          <div
+                            class="leftSideInfo"
+                          >
+                            <span>
+                              
+                            </span>
+                            <br />
+                            <span>
+                              
+                            </span>
+                            <br />
+                            <span>
+                              
+                            </span>
+                          </div>
+                          <div
+                            class="rightSideInfo"
+                          >
+                            <span>
+                              
+                            </span>
+                          </div>
+                        </div>
+                      </app-user-item>
+                    </div>
+                    <div>
+                      <app-user-list-toogle-button>
+                        <div
+                          class="btn btn-secondary dropdown-toggle"
+                        />
+                      </app-user-list-toogle-button>
+                    </div>
+                  </span>
+                </div>
+              </div>
+            </app-user-list-toogle>
+          </div>
+          <div
+            class="listView"
+          >
+            
+          </div>
+        </div>
+      </div>
+    </app-user-list>
+    <div
+      class="buttons"
+    >
+      <button
+        class="btn btn-success"
+      >
+        INFO.NEWBUTTON
+      </button>
+      <button
+        class="btn btn-info"
+      >
+        INFO.EDITBUTTON
+      </button>
+    </div>
+    
+  </div>
+</div>
+`;

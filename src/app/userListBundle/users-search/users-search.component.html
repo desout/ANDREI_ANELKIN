@@ -1,0 +1,8 @@
+<div class="searchComponent">
+  <div class="input-group">
+  <input type="text" placeholder="Search" class="form-control" (keyup)="search(searchInput.value)" #searchInput>
+    <button  type="button"  (click)="search(searchInput.value)" class="btn btn-success material-icons">search</button>
+
+  </div>
+  <div *ngIf="searching === true" class="loader"></div>
+</div>

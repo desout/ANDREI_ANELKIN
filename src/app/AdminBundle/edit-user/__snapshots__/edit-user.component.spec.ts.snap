@@ -1,0 +1,101 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`EditUserComponent should create 1`] = `
+<div
+  id="root0"
+  ng-version="7.0.3"
+>
+  <br />
+  <div
+    class="container"
+  >
+    <form
+      class="ng-untouched ng-pristine ng-invalid"
+      ng-reflect-form="[object Object]"
+      novalidate=""
+    >
+      <div
+        class="form-group"
+      >
+        <label>
+          INFO.USERNAME 
+          <input
+            class="form-control ng-untouched ng-pristine ng-invalid"
+            formcontrolname="name"
+            ng-reflect-name="name"
+          />
+        </label>
+        
+        
+      </div>
+      <div
+        class="form-group"
+      >
+        <label>
+          INFO.BIRTHDAY 
+          <input
+            class="form-control ng-untouched ng-pristine ng-invalid"
+            formcontrolname="dateOfBirth"
+            ng-reflect-name="dateOfBirth"
+            ng-reflect-required=""
+            required=""
+          />
+        </label>
+        
+      </div>
+      <div
+        class="form-group"
+      >
+        <label>
+          INFO.DATEOFLOGIN 
+          <input
+            class="form-control ng-untouched ng-pristine ng-invalid"
+            formcontrolname="dateOfFirstLogin"
+            ng-reflect-name="dateOfFirstLogin"
+            ng-reflect-required=""
+            required=""
+          />
+        </label>
+        
+      </div>
+      <div
+        class="form-group"
+      >
+        <label>
+          INFO.DATEOFNEXTNOTIF 
+          <input
+            class="form-control ng-untouched ng-pristine ng-invalid"
+            formcontrolname="dateNextNotification"
+            ng-reflect-name="dateNextNotification"
+            ng-reflect-required=""
+            required=""
+          />
+        </label>
+        
+      </div>
+      <div
+        class="form-group"
+      >
+        <label>
+          INFO.INFORMATION 
+          <input
+            class="form-control ng-untouched ng-pristine ng-invalid"
+            formcontrolname="information"
+            ng-reflect-name="information"
+            ng-reflect-required=""
+            required=""
+          />
+        </label>
+        
+      </div>
+      <button
+        class="btn btn-default"
+        disabled=""
+        type="submit"
+      >
+        INFO.SUBMITBTN
+      </button>
+    </form>
+  </div>
+</div>
+`;
